@@ -5,7 +5,6 @@ import org.apache.catalina.startup.Tomcat;
 
 import javax.servlet.ServletException;
 import java.io.File;
-import java.net.URLDecoder;
 
 public class TomcatMain {
 
@@ -25,11 +24,13 @@ public class TomcatMain {
         MemcachedBackupSessionManager manager = new MemcachedBackupSessionManager();
         manager.setMemcachedNodes(System.getenv("MEMCACHE_SERVERS") + ":11211");
         manager.setMemcachedProtocol("binary");
-        manager.setUsername(URLDecoder.decode(System.getenv("MEMCACHE_USERNAME")));
-        manager.setPassword(URLDecoder.decode(System.getenv("MEMCACHE_PASSWORD")));
+        manager.setUsername(System.getenv("MEMCACHE_USERNAME"));
+        manager.setPassword(System.getenv("MEMCACHE_PASSWORD"));
         manager.setSticky(false);
         manager.setSessionBackupAsync(true);
         manager.setOperationTimeout(5000);
+        manager.setEnabled(true);
+        manager.setEnableStatistics(true);
         manager.setBackupThreadCount(4);
         manager.setLockingMode("none");
         manager.setRequestUriIgnorePattern(".*\\.(png|gif|jpg|css|js)$");
