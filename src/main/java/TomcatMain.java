@@ -22,10 +22,11 @@ public class TomcatMain {
         }
 
         MemcachedBackupSessionManager manager = new MemcachedBackupSessionManager();
-        manager.setMemcachedNodes("n1:" + System.getenv("MEMCACHE_SERVERS") + ":11211");
+        manager.setMemcachedNodes(System.getenv("MEMCACHE_SERVERS") + ":11211");
         manager.setMemcachedProtocol("binary");
         manager.setUsername(URLDecoder.decode(System.getenv("MEMCACHE_USERNAME")));
         manager.setPassword(URLDecoder.decode(System.getenv("MEMCACHE_PASSWORD")));
+        manager.setSticky(false);
         manager.setLockingMode("auto");
 
 
