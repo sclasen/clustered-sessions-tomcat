@@ -27,12 +27,12 @@ public class TomcatMain {
         manager.setUsername(System.getenv("MEMCACHE_USERNAME"));
         manager.setPassword(System.getenv("MEMCACHE_PASSWORD"));
         manager.setSticky(false);
-        manager.setSessionBackupAsync(true);
+        manager.setSessionBackupAsync(false);
         manager.setOperationTimeout(5000);
         manager.setEnabled(true);
         manager.setEnableStatistics(true);
-        manager.setBackupThreadCount(4);
-        manager.setLockingMode("none");
+        //manager.setBackupThreadCount(4);
+        manager.setLockingMode("auto");
         manager.setRequestUriIgnorePattern(".*\\.(png|gif|jpg|css|js)$");
 
 
