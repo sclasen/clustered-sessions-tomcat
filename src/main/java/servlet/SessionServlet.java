@@ -17,12 +17,16 @@ public class SessionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Long last = (Long) req.getSession().getAttribute("last");
-        Integer count = (Integer) req.getSession().getAttribute("count");
-        count = count == null ? 1 : count + 1;
+        SessionObj s = (SessionObj) req.getSession().getAttribute("x");
+        if (s == null){
+            s = new SessionObj();
+        }
         Long current = System.currentTimeMillis();
-        req.getSession().setAttribute("last", current);
-        req.getSession().setAttribute("count", count);
+        Long last = s.last;
+        Integer count = s.count;
+        s.count += 1;
+        s.last = current;
+        req.getSession().setAttribute("x", s);
         resp.setContentType("text/plain");
         PrintWriter writer = resp.getWriter();
         writer.println("Last:" + last);

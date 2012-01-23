@@ -11,6 +11,7 @@ public class TomcatMain {
 
 
     public static void main(String[] args) throws ServletException, LifecycleException {
+
         String webappDirLocation = "src/main/webapp/";
         Tomcat tomcat = new Tomcat();
 
@@ -27,7 +28,10 @@ public class TomcatMain {
         manager.setUsername(URLDecoder.decode(System.getenv("MEMCACHE_USERNAME")));
         manager.setPassword(URLDecoder.decode(System.getenv("MEMCACHE_PASSWORD")));
         manager.setSticky(false);
-        manager.setLockingMode("auto");
+        manager.setSessionBackupAsync(true);
+        manager.setBackupThreadCount(4);
+        manager.setLockingMode("none");
+        manager.setRequestUriIgnorePattern(".*\\.(png|gif|jpg|css|js)$");
 
 
         tomcat.setPort(Integer.valueOf(webPort));
