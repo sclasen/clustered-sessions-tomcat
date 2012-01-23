@@ -29,6 +29,7 @@ public class TomcatMain {
         manager.setPassword(URLDecoder.decode(System.getenv("MEMCACHE_PASSWORD")));
         manager.setSticky(false);
         manager.setSessionBackupAsync(true);
+        manager.setOperationTimeout(5000);
         manager.setBackupThreadCount(4);
         manager.setLockingMode("none");
         manager.setRequestUriIgnorePattern(".*\\.(png|gif|jpg|css|js)$");
