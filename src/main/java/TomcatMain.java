@@ -32,7 +32,7 @@ public class TomcatMain {
         manager.setEnabled(true);
         manager.setEnableStatistics(true);
         //manager.setBackupThreadCount(4);
-        manager.setLockingMode("auto");
+        manager.setLockingMode("all");
         manager.setRequestUriIgnorePattern(".*\\.(png|gif|jpg|css|js)$");
 
 
