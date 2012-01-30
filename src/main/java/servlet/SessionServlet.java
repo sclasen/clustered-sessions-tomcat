@@ -18,7 +18,7 @@ public class SessionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         SessionObj s = (SessionObj) req.getSession().getAttribute("x");
-        if (s == null){
+        if (s == null) {
             s = new SessionObj();
         }
         Long current = System.currentTimeMillis();
@@ -27,11 +27,9 @@ public class SessionServlet extends HttpServlet {
         s.count += 1;
         s.last = current;
         req.getSession().setAttribute("x", s);
-        resp.setContentType("text/plain");
+        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
-        writer.println("Last:" + last);
-        writer.println("Current:" + current);
-        writer.println("Count:" + count);
+        writer.println("{\"count\":" + count + "}");
         writer.close();
     }
 
